@@ -3,7 +3,7 @@ export const Spinner = () => {
     <div className="flex flex-col items-center justify-center py-12">
       <svg
         aria-hidden="true"
-        className="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className="inline w-10 h-10 text-gray-200 animate-spin dark:text-white fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ export const Spinner = () => {
           fill="currentFill"
         />
       </svg>
-      <div className="text-lg font-medium text-gray-500 mt-4">
+      <div className="text-lg font-medium text-gray-500 dark:text-white mt-4">
         Loading, please wait...
       </div>
     </div>

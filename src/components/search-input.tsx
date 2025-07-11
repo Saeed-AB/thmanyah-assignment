@@ -39,6 +39,7 @@ export const SearchInput = (props: SearchInputProps) => {
     <input
       className={clsx(
         "w-full px-5 py-3 rounded-xl border border-gray-300 focus:border-gray-500 focus:outline-none shadow-sm text-lg mb-6 transition-all duration-200 bg-white placeholder-gray-400",
+        "dark:bg-gray-900 dark:border-gray-700 dark:focus:border-gray-500 dark:text-white dark:placeholder-gray-500",
         className
       )}
       value={inputVal}

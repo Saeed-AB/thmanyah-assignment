@@ -33,6 +33,10 @@ export default function Home() {
     const queries = new URLSearchParams(vals).toString();
     router.replace(`?${queries}`);
 
+    if (!vals.search.length) {
+      setData({ resultCount: 0, results: [] });
+      return;
+    }
     setIsLoading(true);
     try {
       const res = await getSearch({ term: vals.search, media: "podcast" });
@@ -60,8 +64,7 @@ export default function Home() {
   }, []);
 
   return (
-
-    <div className="p-8 min-h-screen flex flex-col items-center">
+    <div className="p-8 min-h-screen flex flex-col items-center bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="w-full container">
         <SearchInput
           value={filters.search}
@@ -71,7 +74,7 @@ export default function Home() {
         />
 
         {!filters.search && (
-          <h1 className="text-2xl font-bold mb-6 text-center text-amber-900">
+          <h1 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">
             Start Search to show the result
           </h1>
         )}
@@ -81,7 +84,7 @@ export default function Home() {
         {!isLoading && data.results.length === 0 && !!filters.search && (
           <div className="flex flex-col items-center justify-center py-12">
             <svg
-              className="h-12 w-12 text-gray-400 mb-4"
+              className="h-12 w-12 text-gray-400 dark:text-gray-500 mb-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
@@ -93,10 +96,12 @@ export default function Home() {
                 d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
               />
             </svg>
-            <div className="text-xl font-semibold text-gray-700 mb-2">
+            <div className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
               No results found
             </div>
-            <div className="text-gray-500">Try a different search term.</div>
+            <div className="text-gray-500 dark:text-gray-400">
+              Try a different search term.
+            </div>
           </div>
         )}
 
@@ -105,7 +110,7 @@ export default function Home() {
             {data.results.map((item, i) => (
               <li
                 key={i}
-                className="bg-white col-span-12 sm:col-span-6 md:col-span-4 rounded-2xl border border-gray-200 shadow-lg p-6 flex flex-col items-center hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 cursor-pointer"
+                className="bg-white dark:bg-gray-800 col-span-12 sm:col-span-6 md:col-span-4 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg p-6 flex flex-col items-center hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 cursor-pointer"
                 onClick={() => window.open(item.trackViewUrl, "_target")}
               >
                 <Image
@@ -116,10 +121,10 @@ export default function Home() {
                   className="rounded-xl object-cover w-24 h-24 mb-4"
                 />
                 <div className="w-full text-center">
-                  <div className="font-semibold text-xl text-amber-800">
+                  <div className="font-semibold text-xl text-amber-800 dark:text-amber-300">
                     {item.artistName}
                   </div>
-                  <div className="text-gray-600 text-base mt-1">
+                  <div className="text-gray-600 dark:text-gray-300 text-base mt-1">
                     {item.collectionName}
                   </div>
                 </div>
